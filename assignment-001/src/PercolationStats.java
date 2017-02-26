@@ -49,18 +49,36 @@ public class PercolationStats {
         }
     }
 
+    /**
+     * Calculate the mean percolation threshold
+     * @return The mean percolation threshold
+     */
     public double mean() {
         return StdStats.mean(stats);
     }
 
+    /**
+     * Calculate the standard deviation of the percolation threshold
+     * @return The standard deviation of the percolation threshold
+     */
     public double stddev() {
         return StdStats.stddev(stats);
     }
 
+    /**
+     * Calculate the lower bound of the 95% confidence interval
+     * of the percolation threshold
+     * @return The lower 95% confidence interval
+     */
     public double confidenceLo() {
         return (mean() - 1.96 * stddev() / Math.sqrt(trials));
     }
 
+    /**
+     * Calculate the higher bound of the 95% confidence interval
+     * of the percolation threshold
+     * @return The higher 95% confidence interval
+     */
     public double confidenceHi() {
         return (mean() + 1.96 * stddev() / Math.sqrt(trials));
     }

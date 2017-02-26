@@ -107,7 +107,6 @@ public class Percolation {
                     siteTree.union(currentSite, currentSite + 1);
                 }
             }
-
         }
     }
 
