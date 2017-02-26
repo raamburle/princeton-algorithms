@@ -1,7 +1,5 @@
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
-import java.util.Arrays;
-
 /**
  * Percolation is a class used to store a simple NxN grid
  * This grid can be used to calculate the percolation threshold
@@ -53,11 +51,8 @@ public class Percolation {
         }
 
         numberOfOpenSites = 0;  // No open sites to begin with
-        // TODO - Remove all SysOuts
-        //System.out.println(Arrays.deepToString(grid));
 
         // Create site tree structure and calculate top/bottom site indices
-
         siteTree = new WeightedQuickUnionUF(gridSize * gridSize + 2);
         HEAD_SITE = 0;
         TAIL_SITE = gridSize * gridSize + 1;
@@ -113,9 +108,6 @@ public class Percolation {
                 }
             }
 
-        } else {
-            // TODO - Remove this block after coding complete
-            //System.out.println("Already open");
         }
     }
 
@@ -188,28 +180,5 @@ public class Percolation {
                         (paramName + " invalid" + "value: " + arg);
             }
         }
-    }
-
-    // TODO - Remove main after coding complete
-    public static void main(String[] args) {
-        //int n = Integer.parseInt(args[0]);
-        int n = 6;
-        Percolation grid = new Percolation(n);
-        grid.open(1, 2);
-        System.out.println(grid.percolates());
-        grid.open(2, 2);
-        System.out.println(grid.percolates());
-        grid.open(2, 3);
-        System.out.println(grid.percolates());
-        grid.open(3, 3);
-        System.out.println(grid.percolates());
-        grid.open(4, 3);
-        System.out.println(grid.percolates());
-        grid.open(5, 2);
-        System.out.println(grid.percolates());
-        grid.open(5, 3);
-        System.out.println(grid.percolates());
-        grid.open(6, 2);
-        System.out.println(grid.percolates());
     }
 }
