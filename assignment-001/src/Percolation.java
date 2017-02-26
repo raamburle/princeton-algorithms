@@ -16,27 +16,27 @@ public class Percolation {
     private int numberOfOpenSites;
 
     // Dummy head site
-    private final int HEAD_SITE;
+    private final int headSite;
     // Dummy tail site
-    private final int TAIL_SITE;
+    private final int tailSite;
 
     // Grid storing open/close state of individual sites
     private boolean[][] grid;
 
     // Union/find structure used to maintain site connections in the grid
-    WeightedQuickUnionUF siteTree;
+    private WeightedQuickUnionUF siteTree;
 
     /**
      * Constructor
      *
      * @param n (required) Size of the grid. Has to be greater than zero
      */
-    Percolation(int n) {
+    public Percolation(int n) {
 
         // Check if grid size is legal and create the grid.
         if (n < 1) {
-            throw new IllegalArgumentException
-                    ("Invalid grid size. Must be greater than zero");
+            throw new IllegalArgumentException(
+                    "Invalid grid size. Must be greater than zero");
         }
         gridSize = n;
 
@@ -54,8 +54,8 @@ public class Percolation {
 
         // Create site tree structure and calculate top/bottom site indices
         siteTree = new WeightedQuickUnionUF(gridSize * gridSize + 2);
-        HEAD_SITE = 0;
-        TAIL_SITE = gridSize * gridSize + 1;
+        headSite = 0;
+        tailSite = gridSize * gridSize + 1;
     }
 
     /**
@@ -70,7 +70,7 @@ public class Percolation {
     public void open(int row, int col) {
         // No need to check arguments here as isOpen() is being called
 
-        if (isOpen(row, col) != true) {
+        if (!isOpen(row, col)) {
             grid[row - 1][col - 1] = true;
             numberOfOpenSites++;    // One more site opened up
 
@@ -81,7 +81,7 @@ public class Percolation {
             // Connect to top site if open
             if (row == 1) {
                 // Site in top row. Connect to head site
-                siteTree.union(currentSite, HEAD_SITE);
+                siteTree.union(currentSite, headSite);
             } else {
                 if (isOpen(row - 1, col)) {
                     siteTree.union(currentSite, currentSite - gridSize);
@@ -91,7 +91,7 @@ public class Percolation {
             // Connect to bottom site if open
             if (row == gridSize) {
                 // Site in bottom row. Connect to tail site
-                siteTree.union(currentSite, TAIL_SITE);
+                siteTree.union(currentSite, tailSite);
             } else {
                 if (isOpen(row + 1, col)) {
                     siteTree.union(currentSite, currentSite + gridSize);
@@ -138,9 +138,9 @@ public class Percolation {
      * <code>false</code> otherwise
      */
     public boolean isFull(int row, int col) {
-        checkArguments("Grid indices", row, col);
+        checkArguments("Grid indices", gridSize, row, col);
 
-        return siteTree.connected((row - 1) * gridSize + col, HEAD_SITE);
+        return siteTree.connected((row - 1) * gridSize + col, headSite);
     }
 
     /**
@@ -159,7 +159,7 @@ public class Percolation {
      * <code>false</code> otherwise
      */
     public boolean percolates() {
-        return siteTree.connected(HEAD_SITE, TAIL_SITE);
+        return siteTree.connected(headSite, tailSite);
     }
 
     /**
@@ -175,8 +175,8 @@ public class Percolation {
                                        int gridSize, int... args) {
         for (int arg : args) {
             if (arg < 1 || arg > gridSize) {
-                throw new IllegalArgumentException
-                        (paramName + " invalid" + "value: " + arg);
+                throw new IllegalArgumentException(
+                        paramName + " invalid" + "value: " + arg);
             }
         }
     }

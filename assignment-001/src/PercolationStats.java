@@ -1,8 +1,6 @@
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
 
-import static java.lang.System.exit;
-
 /**
  * PercolationStats class is used to capture percolation threshold
  * using Monte Carlo simulation and capture statistical data
@@ -14,7 +12,7 @@ import static java.lang.System.exit;
 public class PercolationStats {
 
     // Maintains the number of sites at percolation for each run
-    private double stats[];
+    private double[] stats;
 
     // No. of trials in this experiment
     private int trials;
@@ -89,17 +87,17 @@ public class PercolationStats {
             System.out.println("Invalid arguments");
             System.out.println("\nUsage:\n\nPercolationStats " +
                     "<grid size> <no. of trials>");
-            exit(1);
+        } else {
+
+            int n = Integer.parseInt(args[0]);            // grid size
+            int trials = Integer.parseInt(args[1]);       // no. of trials
+
+            PercolationStats experiment = new PercolationStats(n, trials);
+            System.out.println("Mean                    = " + experiment.mean());
+            System.out.println("StdDev                  = " + experiment.stddev());
+            System.out.println("95% confidence interval = ["
+                    + experiment.confidenceLo() + ", "
+                    + experiment.confidenceHi() + "]");
         }
-
-        int n = Integer.parseInt(args[0]);            // grid size
-        int trials = Integer.parseInt(args[1]);       // no. of trials
-
-        PercolationStats experiment = new PercolationStats(n, trials);
-        System.out.println("Mean                    = " + experiment.mean());
-        System.out.println("StdDev                  = " + experiment.stddev());
-        System.out.println("95% confidence interval = ["
-                + experiment.confidenceLo() + ", "
-                + experiment.confidenceHi() + "]");
     }
 }
