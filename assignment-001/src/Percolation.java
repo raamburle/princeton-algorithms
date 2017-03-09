@@ -138,6 +138,11 @@ public class Percolation {
      * <code>false</code> otherwise
      */
     public boolean isFull(int row, int col) {
+
+        /** TODO - isFull has issues for sites in the bottom row. Site
+         * opened in bottom row should be connected to tail
+         * only if it is already full
+         */
         checkArguments("Grid indices", gridSize, row, col);
 
         return siteTree.connected((row - 1) * gridSize + col, headSite);
@@ -179,5 +184,22 @@ public class Percolation {
                         paramName + " invalid" + "value: " + arg);
             }
         }
+    }
+
+    public static void main(String[] args) {
+        Percolation p = new Percolation(3);
+
+        p.open(1,3);
+        System.out.println(p.isFull(3,1));
+        p.open(2,3);
+        System.out.println(p.isFull(3,1));
+        p.open(3,3);
+        System.out.println(p.isFull(3,1));
+        p.open(3,1);
+        System.out.println(p.isFull(3,1));
+        p.open(2,1);
+        System.out.println(p.isFull(3,1));
+        p.open(1,1);
+        System.out.println(p.isFull(3,1));
     }
 }
