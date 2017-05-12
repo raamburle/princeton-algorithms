@@ -188,7 +188,4 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
                     ("Element removal via iterator not allowed");
         }
     }
-
-    public static void main(String[] args) {
-    }
 }

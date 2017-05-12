@@ -164,24 +164,6 @@ public class Deque<Item> implements Iterable<Item> {
         System.out.println(output);
     }
 
-    public static void main(String[] args) {
-
-        Deque<Integer> deque = new Deque<Integer>();
-
-        deque.addFirst(5);        deque.printQueue();   // 5
-        deque.addFirst(6);        deque.printQueue();   // 6 5
-        deque.removeLast();        deque.printQueue();  // 6
-        deque.addFirst(3);        deque.printQueue();   // 3 6
-        deque.removeFirst();        deque.printQueue(); // 6
-        deque.addFirst(10);        deque.printQueue();  // 10 6
-        deque.addLast(4);        deque.printQueue();    // 10 6 4
-        deque.removeFirst();        deque.printQueue(); // 6 4
-        deque.addLast(8);        deque.printQueue();    // 6 4 8
-        deque.addLast(7);        deque.printQueue();    // 6 4 8 7
-        deque.removeLast();        deque.printQueue();  // 6 4 8
-        deque.addLast(20);        deque.printQueue();   // 6 4 8 20
-    }
-
     private class DequeIterator implements Iterator<Item> {
 
         private Node cursor;
