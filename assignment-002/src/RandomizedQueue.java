@@ -1,3 +1,6 @@
+import edu.princeton.cs.algs4.StdRandom;
+
+import javax.naming.OperationNotSupportedException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -24,6 +27,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         // TODO - Change this to use Array.newInstance()
         queue = (Item[]) new Object[10];
         size = 0;
+
+        // Set PRNG seed using system time.
+        StdRandom.setSeed(System.currentTimeMillis());
     }
 
     /**
@@ -104,26 +110,79 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         size++;
     }
 
+    /**
+     * Removes and returns a random item from the queue
+     * @return A random item from the queue.
+     */
     public Item dequeue() {
         if (size == 0) {
             throw new NoSuchElementException("Queue is already empty");
         }
 
-        Item element = queue[size];
-        queue[size] = null;
+        int elementToRemove = StdRandom.uniform(size);
+        Item element = queue[elementToRemove];
+
+        // Move the last element to this location so the array is compressed.
+        queue[elementToRemove] = queue[size - 1];
+
+        // Reset the removed element to address loitering.
+        queue[size - 1] = null;
+
         size--;
         trimQueueIfpossible();
         return  element;
     }
 
+    /**
+     * Returns (But does not remove) a random item from the queue
+     * @return A random item from the queue.
+     */
     public Item sample() {
         if (size == 0) {
             throw new NoSuchElementException("Queue is empty");
         }
+
+        return queue[StdRandom.uniform(size)];
     }
 
     @Override
     public Iterator<Item> iterator() {
+    }
+
+    private class RandomizedQueueIterator implements Iterator<Item> {
+
+        private int[] elementOrder;
+        private int cursor;
+
+        public RandomizedQueueIterator() {
+
+            // Initiate array with random order
+            elementOrder = new int[size];
+            for (int i = 0; i < size; i++) {
+                elementOrder[i] = i;
+            }
+            // Each iterator is required to have a separate random
+            // order. Set PRNG seed using system time.
+            StdRandom.setSeed(System.currentTimeMillis());
+
+            StdRandom.shuffle(elementOrder);
+            cursor = 0;
+        }
+        @Override
+        public boolean hasNext() {
+            return (cursor >= elementOrder.length);
+        }
+
+        @Override
+        public Item next() {
+            return null;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException
+                    ("Element removal via iterator not allowed");
+        }
     }
 
     public static void main(String[] args) {
