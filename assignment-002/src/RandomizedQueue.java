@@ -147,6 +147,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     @Override
     public Iterator<Item> iterator() {
+        return new RandomizedQueueIterator();
     }
 
     private class RandomizedQueueIterator implements Iterator<Item> {
@@ -170,12 +171,15 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
         @Override
         public boolean hasNext() {
-            return (cursor >= elementOrder.length);
+            return (cursor < elementOrder.length);
         }
 
         @Override
         public Item next() {
-            return null;
+            if (!hasNext()) {
+                throw new NoSuchElementException("Queue is already empty");
+            }
+            return queue[elementOrder[cursor++]];
         }
 
         @Override
