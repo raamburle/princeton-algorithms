@@ -3,6 +3,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,11 +36,20 @@ public class DequeIteratorTest {
     @Test
     @DisplayName("Test the hasNext() method")
     void testHasNext() {
+        // Check for empty Deque
+        assertFalse(deque.iterator().hasNext());
 
+        // Check non-empty Deque
         deque.addFirst("Hello1");
-        deque.addFirst("Hello2");
+        Iterator<String> iterator = deque.iterator();
+        assertTrue(iterator.hasNext());
 
+        // Test for concurrent modification
+        deque.removeFirst();
+        assertThrows(ConcurrentModificationException.class, () -> iterator.hasNext());
 
+        // Test if a new iterator works if created on a modified list
+        assertFalse(deque.iterator().hasNext());
     }
 
     private void clearDeque() {
