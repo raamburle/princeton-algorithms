@@ -1,3 +1,4 @@
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -168,24 +169,33 @@ public class Deque<Item> implements Iterable<Item> {
 
         private Node cursor;
 
+        // Store size at creation as a primitive guard against
+        // concurrent modification.
+        private int startingSize;
+
         public DequeIterator() {
             cursor = front;
+            startingSize = size;
         }
 
         @Override
         public boolean hasNext() {
-            /*if (cursor != null) {
-                if (cursor.next != null) {
-                    return true;
-                }
+            if(startingSize != size){
+                //Deque modified. Throw exception
+                throw new ConcurrentModificationException(
+                        "Iterator expired as the deque has been modified");
             }
-            return false;*/
-
             return (cursor == null) ? false : true;
         }
 
         @Override
         public Item next() {
+            if(startingSize != size){
+                //Deque modified. Throw exception
+                throw new ConcurrentModificationException(
+                        "Iterator expired as the deque has been modified");
+            }
+
             if (hasNext()) {
                 Node current = cursor;
                 cursor = cursor.next;
