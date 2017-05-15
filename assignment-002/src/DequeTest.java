@@ -98,6 +98,46 @@ public class DequeTest {
         assertEquals(deque.size(), 0);
     }
 
+    @Test
+    @DisplayName("Test Forward FIFO sequence. Add and remove in same direction")
+    void testForwardSequence() {
+        for (int i = 1; i < 4; i++) {
+            deque.addFirst("Hello" + i);
+        }
+
+        for (int i = 3; i > 0 ; i--) {
+            assertEquals(deque.removeFirst(), "Hello" + i);
+        }
+
+        for (int i = 1; i < 4; i++) {
+            deque.addLast("Hello" + i);
+        }
+
+        for (int i = 3; i > 0 ; i--) {
+            assertEquals(deque.removeLast(), "Hello" + i);
+        }
+    }
+
+    @Test
+    @DisplayName("Test Reverse FIFO sequence. Add and remove in reverse direction")
+    void testReverseSequence() {
+        for (int i = 1; i < 4; i++) {
+            deque.addFirst("Hello" + i);
+        }
+
+        for (int i = 1; i < 4; i++) {
+            assertEquals(deque.removeLast(), "Hello" + i);
+        }
+
+        for (int i = 1; i < 4; i++) {
+            deque.addLast("Hello" + i);
+        }
+
+        for (int i = 1; i < 4; i++) {
+            assertEquals(deque.removeFirst(), "Hello" + i);
+        }
+    }
+
     private void clearDeque() {
         if (deque != null) {
             while(!deque.isEmpty()) {
