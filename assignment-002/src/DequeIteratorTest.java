@@ -52,6 +52,34 @@ public class DequeIteratorTest {
         assertFalse(deque.iterator().hasNext());
     }
 
+    @Test
+    @DisplayName("Test the next() method" + "")
+    void testNext() {
+        // Test for next() on an empty deque
+        assertThrows(NoSuchElementException.class, () -> deque.iterator().next());
+
+        // Test on a non-empty deque
+        deque.addFirst("Hello1");
+        deque.addFirst("Hello2");
+        Iterator<String> iterator1 = deque.iterator();
+        assertEquals(iterator1.next(), "Hello2");
+
+        // Test for concurrent modification
+        // Must throw ConcurrentModificationException
+        deque.removeFirst();
+        assertThrows(ConcurrentModificationException.class, () -> iterator1.next());
+
+        // Confirm NoSuchElementException at the deque end
+        deque.addFirst("Hello3");
+        deque.addLast("Hello4");
+        Iterator<String> iterator2 = deque.iterator();
+        for (int i = 0; i < deque.size(); i++) {
+            iterator2.next();
+        }
+
+        assertThrows(NoSuchElementException.class, () -> iterator2.next());
+    }
+
     private void clearDeque() {
         if (deque != null) {
             while(!deque.isEmpty()) {
