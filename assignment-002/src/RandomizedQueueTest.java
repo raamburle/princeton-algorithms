@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class RandomizedQueueTest {
 
-    private RandomizedQueue randomizedQueue;
+    private RandomizedQueue<String> randomizedQueue;
     @BeforeEach
     void setUp() {
-        randomizedQueue = new RandomizedQueue();
+        randomizedQueue = new RandomizedQueue<String>();
     }
 
     @AfterEach
@@ -84,6 +84,31 @@ class RandomizedQueueTest {
         assertEquals(randomizedQueue.size(), 1);
     }
 
+    @Test
+    @DisplayName("Test random order on dequeue()")
+    void testRandomDequeue() {
+        for (Integer i = 0; i < 10; i++) {
+            randomizedQueue.enqueue(i.toString());
+        }
+        String str = "";
+        while(!randomizedQueue.isEmpty()) {
+            str += randomizedQueue.dequeue();
+        }
+        assertNotEquals("0123456789", str);
+    }
+
+    @Test
+    @DisplayName("Test random order on sample()")
+    void testRandomSample() {
+        for (Integer i = 0; i < 10; i++) {
+            randomizedQueue.enqueue(i.toString());
+        }
+        String str = "";
+        for (int i = 0; i < 10; i++) {
+            str += randomizedQueue.sample();
+        }
+        assertNotEquals("0123456789", str);
+    }
     private void clearDeque() {
         if (randomizedQueue != null) {
             while(!randomizedQueue.isEmpty()) {
