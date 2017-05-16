@@ -24,7 +24,7 @@ public class DequeTest {
 
     @Test
     @DisplayName("Test isEmpty() method")
-    void isEmpty() {
+    void testIsEmpty() {
         assertTrue(deque.isEmpty());
 
         deque.addFirst("Hello");
@@ -36,7 +36,7 @@ public class DequeTest {
 
     @Test
     @DisplayName("Test size() method")
-    void size() {
+    void testSize() {
         assertEquals(deque.size(), 0);
 
         deque.addFirst("Hello1");
@@ -54,25 +54,32 @@ public class DequeTest {
 
     @Test
     @DisplayName("Test the addFirst() method")
-    void addFirst() {
+    void testAddFirst() {
         deque.addFirst("Hello1");
+        assertEquals(deque.size(), 1);
         assertEquals(deque.removeFirst(), "Hello1");
 
+        // Test null element addition
         assertThrows(NullPointerException.class,() -> deque.addFirst(null));
+        assertEquals(deque.size(), 0);
     }
 
     @Test
     @DisplayName("Test the addLast() method")
-    void addLast() {
+    void testAddLast() {
         deque.addLast("Hello1");
+
+        assertEquals(deque.size(), 1);
         assertEquals(deque.removeLast(), "Hello1");
 
+        // Test null element addition
         assertThrows(NullPointerException.class,() -> deque.addLast(null));
+        assertEquals(deque.size(), 0);
     }
 
     @Test
     @DisplayName("Test the removeFirst() method")
-    void removeFirst() {
+    void testRemoveFirst() {
         assertThrows(NoSuchElementException.class, () -> deque.removeFirst());
 
         deque.addFirst("Hello1");
@@ -86,7 +93,7 @@ public class DequeTest {
 
     @Test
     @DisplayName("Test the removeLast() method")
-    void removeLast() {
+    void testRemoveLast() {
         assertThrows(NoSuchElementException.class, () -> deque.removeLast());
 
         deque.addLast("Hello1");
