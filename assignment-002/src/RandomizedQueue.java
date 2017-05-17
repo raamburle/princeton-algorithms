@@ -1,6 +1,7 @@
 import edu.princeton.cs.algs4.StdRandom;
 
 import javax.naming.OperationNotSupportedException;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -171,11 +172,25 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         }
         @Override
         public boolean hasNext() {
+            // A primitive concurrent modification check
+            // based on queue size change
+            if(size != elementOrder.length) {
+                throw new ConcurrentModificationException(
+                        "Iterator expired as the queue has been modified"
+                );
+            }
             return (cursor < elementOrder.length);
         }
 
         @Override
         public Item next() {
+            // A primitive concurrent modification check
+            // based on queue size change
+            if(size != elementOrder.length) {
+                throw new ConcurrentModificationException(
+                        "Iterator expired as the queue has been modified"
+                );
+            }
             if (!hasNext()) {
                 throw new NoSuchElementException("Queue is already empty");
             }
