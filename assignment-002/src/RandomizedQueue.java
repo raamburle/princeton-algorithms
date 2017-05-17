@@ -30,7 +30,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         size = 0;
 
         // Set PRNG seed using system time.
-        StdRandom.setSeed(System.currentTimeMillis());
+        StdRandom.setSeed(System.nanoTime());
     }
 
     /**
@@ -165,7 +165,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             }
             // Each iterator is required to have a separate random
             // order. Set PRNG seed using system time.
-            StdRandom.setSeed(System.currentTimeMillis());
+            StdRandom.setSeed(System.nanoTime());
 
             StdRandom.shuffle(elementOrder);
             cursor = 0;
