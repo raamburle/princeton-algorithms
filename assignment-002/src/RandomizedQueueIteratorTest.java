@@ -52,7 +52,7 @@ public class RandomizedQueueIteratorTest {
     }
 
     @Test
-    @DisplayName("Test the next() method" + "")
+    @DisplayName("Test the next() method")
     void testNext() {
         // Test for next() on an empty randomizedQueue
         assertThrows(NoSuchElementException.class, () -> randomizedQueue.iterator().next());
@@ -71,6 +71,47 @@ public class RandomizedQueueIteratorTest {
         randomizedQueue.enqueue("Hello2");
         Iterator<String> iterator2 = randomizedQueue.iterator();
         assertEquals(iterator2.next(), "Hello2");
+    }
+
+    @Test
+    @DisplayName("Test random order of the iterator()")
+    void testRandomOrder() {
+        for (Integer i = 0; i < 10; i++) {
+            randomizedQueue.enqueue(i.toString());
+        }
+
+        String str = "";
+        for(String s: randomizedQueue) {
+            str += s;
+        }
+        assertNotEquals("0123456789", str);
+        assertNotEquals("9876543210", str);
+    }
+
+    @Test
+    @DisplayName("Test if two iterators have different random orders")
+    void testOrderExclusivity() {
+        for (Integer i = 0; i < 10; i++) {
+            randomizedQueue.enqueue(i.toString());
+        }
+
+        String str1 = "";
+        String str2 = "";
+        /*for(String s: randomizedQueue) {
+            str1 += s;
+        }*/
+        Iterator<String> iterator1 = randomizedQueue.iterator();
+
+        while(iterator1.hasNext()) {
+            str1 += iterator1.next();
+        }
+        Iterator<String> iterator2 = randomizedQueue.iterator();
+
+        while(iterator2.hasNext()) {
+            str2 += iterator2.next();
+        }
+        System.out.println(str1 + " : " + str2);
+        assertFalse(str1.equals(str2));
     }
 
     private void clearQueue() {
