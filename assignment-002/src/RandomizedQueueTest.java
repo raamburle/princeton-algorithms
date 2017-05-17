@@ -20,7 +20,7 @@ class RandomizedQueueTest {
 
     @AfterEach
     void tearDown() {
-        clearDeque();
+        clearQueue();
     }
 
     @Test
@@ -109,7 +109,7 @@ class RandomizedQueueTest {
         }
         assertNotEquals("0123456789", str);
     }
-    private void clearDeque() {
+    private void clearQueue() {
         if (randomizedQueue != null) {
             while(!randomizedQueue.isEmpty()) {
                 randomizedQueue.dequeue();
