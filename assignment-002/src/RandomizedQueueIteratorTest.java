@@ -13,6 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * Created by Rohan Amburle on 5/16/2017.
  */
+
+@DisplayName("Test the RandomizedQueue Iterator")
 public class RandomizedQueueIteratorTest {
     private RandomizedQueue<String> randomizedQueue;
 

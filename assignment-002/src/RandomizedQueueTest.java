@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Created by Rohan Amburle on 5/12/2017.
  */
+@DisplayName("Test the RandomizedQueue")
 class RandomizedQueueTest {
 
     private RandomizedQueue<String> randomizedQueue;
