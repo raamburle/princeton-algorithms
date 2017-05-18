@@ -1,6 +1,5 @@
 import edu.princeton.cs.algs4.StdRandom;
 
-import javax.naming.OperationNotSupportedException;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
