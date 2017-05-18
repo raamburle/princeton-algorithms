@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Created by Rohan Amburle on 5/12/2017.
+ *
+ * Test class for RandomizedQueue
  */
 @DisplayName("Test the RandomizedQueue")
 class RandomizedQueueTest {
@@ -16,7 +18,7 @@ class RandomizedQueueTest {
     private RandomizedQueue<String> randomizedQueue;
     @BeforeEach
     void setUp() {
-        randomizedQueue = new RandomizedQueue<String>();
+        randomizedQueue = new RandomizedQueue<>();
     }
 
     @AfterEach
@@ -110,6 +112,26 @@ class RandomizedQueueTest {
         }
         assertNotEquals("0123456789", str);
     }
+    /*
+    @Test
+    @DisplayName("Test if the array resize works")
+    void testArrayResize() {
+        assertEquals(10, randomizedQueue.length());
+
+        for (Integer i = 0; i < 11; i++) {
+            randomizedQueue.enqueue(i.toString());
+        }
+        assertEquals(20, randomizedQueue.length());
+        for (int i = 0; i < 6; i++) {
+            randomizedQueue.dequeue();
+        }
+        assertEquals(10, randomizedQueue.length());
+        while(randomizedQueue.size() > 0) {
+            randomizedQueue.dequeue();
+        }
+        assertEquals(10, randomizedQueue.length());
+    }
+    */
     private void clearQueue() {
         if (randomizedQueue != null) {
             while(!randomizedQueue.isEmpty()) {

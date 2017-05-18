@@ -12,15 +12,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Created by Rohan Amburle on 5/16/2017.
+ *
+ * Test class for RandomizedQueue iterator
  */
 
 @DisplayName("Test the RandomizedQueue Iterator")
-public class RandomizedQueueIteratorTest {
+class RandomizedQueueIteratorTest {
     private RandomizedQueue<String> randomizedQueue;
 
     @BeforeEach
     void setUp() {
-        randomizedQueue = new RandomizedQueue<String>();
+        randomizedQueue = new RandomizedQueue<>();
     }
 
     @AfterEach
@@ -99,20 +101,14 @@ public class RandomizedQueueIteratorTest {
 
         String str1 = "";
         String str2 = "";
-        /*for(String s: randomizedQueue) {
-            str1 += s;
-        }*/
         Iterator<String> iterator1 = randomizedQueue.iterator();
 
         while(iterator1.hasNext()) {
             str1 += iterator1.next();
         }
-        Iterator<String> iterator2 = randomizedQueue.iterator();
-
-        while(iterator2.hasNext()) {
-            str2 += iterator2.next();
+        for(String s: randomizedQueue) {
+            str2 += s;
         }
-        System.out.println(str1 + " : " + str2);
         assertFalse(str1.equals(str2));
     }
 
