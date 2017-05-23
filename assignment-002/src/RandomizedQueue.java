@@ -17,7 +17,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private int size;
 
     // We use an array to store elements. Resize as needed.
-    Item queue[];
+    private Item queue[];
 
     public RandomizedQueue() {
 
