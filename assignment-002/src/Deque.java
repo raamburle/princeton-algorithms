@@ -180,7 +180,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public boolean hasNext() {
-            if(startingSize != size){
+            if (startingSize != size) {
                 //Deque modified. Throw exception
                 throw new ConcurrentModificationException(
                         "Iterator expired as the deque has been modified");
@@ -190,7 +190,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         @Override
         public Item next() {
-            if(startingSize != size){
+            if (startingSize != size) {
                 //Deque modified. Throw exception
                 throw new ConcurrentModificationException(
                         "Iterator expired as the deque has been modified");

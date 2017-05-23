@@ -22,7 +22,7 @@ public class Permutation {
         for (; ; ) {
             try {
                 queue.enqueue(StdIn.readString());
-            } catch(NoSuchElementException e){
+            } catch (NoSuchElementException e) {
                 break;
             }
         }

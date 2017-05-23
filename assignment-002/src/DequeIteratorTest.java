@@ -82,7 +82,7 @@ public class DequeIteratorTest {
 
     private void clearDeque() {
         if (deque != null) {
-            while(!deque.isEmpty()) {
+            while (!deque.isEmpty()) {
                 deque.removeFirst();
             }
         }

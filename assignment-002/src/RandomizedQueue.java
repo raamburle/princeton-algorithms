@@ -50,12 +50,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (size <= (queue.length / 4)) {
             // No need to check lower boundaries
             // as array size should never go below 2
-            resizeQueue(queue.length/2);
+            resizeQueue(queue.length / 2);
         }
     }
 
     /**
      * Resizes the array to give size and copies the content over
+     *
      * @param newSize New array size
      */
     private void resizeQueue(int newSize) {
@@ -68,7 +69,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         if (newSize >= 10) {
             Item newQueue[] = (Item[]) new Object[newSize];
 
-            for(int i=0; i<size;i++) {
+            for (int i = 0; i < size; i++) {
                 newQueue[i] = queue[i];
                 // Remove old references
                 queue[i] = null;
@@ -98,6 +99,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     /**
      * Add an element to the back of the queue
+     *
      * @param item Element to be added
      */
     public void enqueue(Item item) {
@@ -112,6 +114,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     /**
      * Removes and returns a random item from the queue
+     *
      * @return A random item from the queue.
      */
     public Item dequeue() {
@@ -130,11 +133,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         size--;
         trimQueueIfpossible();
-        return  element;
+        return element;
     }
 
     /**
      * Returns (But does not remove) a random item from the queue
+     *
      * @return A random item from the queue.
      */
     public Item sample() {
@@ -169,11 +173,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             StdRandom.shuffle(elementOrder);
             cursor = 0;
         }
+
         @Override
         public boolean hasNext() {
             // A primitive concurrent modification check
             // based on queue size change
-            if(size != elementOrder.length) {
+            if (size != elementOrder.length) {
                 throw new ConcurrentModificationException(
                         "Iterator expired as the queue has been modified"
                 );
@@ -185,7 +190,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         public Item next() {
             // A primitive concurrent modification check
             // based on queue size change
-            if(size != elementOrder.length) {
+            if (size != elementOrder.length) {
                 throw new ConcurrentModificationException(
                         "Iterator expired as the queue has been modified"
                 );

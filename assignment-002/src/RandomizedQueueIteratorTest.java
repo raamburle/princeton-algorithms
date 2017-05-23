@@ -8,11 +8,10 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * Created by Rohan Amburle on 5/16/2017.
- *
+ * <p>
  * Test class for RandomizedQueue iterator
  */
 
@@ -85,7 +84,7 @@ class RandomizedQueueIteratorTest {
         }
 
         String str = "";
-        for(String s: randomizedQueue) {
+        for (String s : randomizedQueue) {
             str += s;
         }
         assertNotEquals("0123456789", str);
@@ -103,10 +102,10 @@ class RandomizedQueueIteratorTest {
         String str2 = "";
         Iterator<String> iterator1 = randomizedQueue.iterator();
 
-        while(iterator1.hasNext()) {
+        while (iterator1.hasNext()) {
             str1 += iterator1.next();
         }
-        for(String s: randomizedQueue) {
+        for (String s : randomizedQueue) {
             str2 += s;
         }
         assertFalse(str1.equals(str2));
@@ -114,7 +113,7 @@ class RandomizedQueueIteratorTest {
 
     private void clearQueue() {
         if (randomizedQueue != null) {
-            while(!randomizedQueue.isEmpty()) {
+            while (!randomizedQueue.isEmpty()) {
                 randomizedQueue.dequeue();
             }
         }

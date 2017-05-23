@@ -1,4 +1,7 @@
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
 
@@ -60,7 +63,7 @@ public class DequeTest {
         assertEquals(deque.removeFirst(), "Hello1");
 
         // Test null element addition
-        assertThrows(NullPointerException.class,() -> deque.addFirst(null));
+        assertThrows(NullPointerException.class, () -> deque.addFirst(null));
         assertEquals(deque.size(), 0);
     }
 
@@ -73,7 +76,7 @@ public class DequeTest {
         assertEquals(deque.removeLast(), "Hello1");
 
         // Test null element addition
-        assertThrows(NullPointerException.class,() -> deque.addLast(null));
+        assertThrows(NullPointerException.class, () -> deque.addLast(null));
         assertEquals(deque.size(), 0);
     }
 
@@ -112,7 +115,7 @@ public class DequeTest {
             deque.addFirst("Hello" + i);
         }
 
-        for (int i = 3; i > 0 ; i--) {
+        for (int i = 3; i > 0; i--) {
             assertEquals(deque.removeFirst(), "Hello" + i);
         }
 
@@ -120,7 +123,7 @@ public class DequeTest {
             deque.addLast("Hello" + i);
         }
 
-        for (int i = 3; i > 0 ; i--) {
+        for (int i = 3; i > 0; i--) {
             assertEquals(deque.removeLast(), "Hello" + i);
         }
     }
@@ -147,7 +150,7 @@ public class DequeTest {
 
     private void clearDeque() {
         if (deque != null) {
-            while(!deque.isEmpty()) {
+            while (!deque.isEmpty()) {
                 deque.removeFirst();
             }
         }
